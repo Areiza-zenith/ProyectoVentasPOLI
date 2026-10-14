@@ -1,0 +1,8 @@
+TI;40340731;Mariana;Perez Gomez
+TI;19529780;Alejandro;Morales Ramirez
+CC;77398812;Paula;Vargas Garcia
+CE;99756474;Paula;Jimenez Castro
+CC;46403668;Diego;Vargas Suarez
+TI;65656031;Felipe;Jimenez Sanchez
+CC;87906551;Laura;Perez Ramirez
+CE;28660537;Felipe;Vargas Ramirez
