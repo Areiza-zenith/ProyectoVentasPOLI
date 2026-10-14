@@ -1,15 +1,23 @@
-# Proyecto Ventas POLI — Entrega 1 (Semana 3)
+# Proyecto Ventas POLI — Entrega final (Semanas 7 y 8)
 
 **Módulo:** Conceptos Fundamentales de Programación
 **Entrega:** Generación y clasificación de datos
-**Grupo:** 14 — Herramientas de Programación Móvil
+**Integrantes:** Cristian Fabián Areiza Umbacia, Daniela Herrera Pulido, Jhonathan Urrego Cordero, Joseph Benavides Diaz, Kevin Leonardo Vanegas Osorio
 
-## Contenido de esta entrega
+## Descripción
 
-Esta primera entrega corresponde al diseño e implementación de la clase
-`GenerateInfoFiles`, encargada de generar los archivos planos
-pseudoaleatorios que servirán como entrada para el programa principal
-(clase `main`, que se implementará en las siguientes entregas).
+Programa en Java 8 (proyecto de Eclipse) que genera archivos planos de prueba
+con productos, vendedores y ventas, y a partir de ellos crea dos reportes en
+formato CSV: el dinero recaudado por cada vendedor y los productos vendidos
+ordenados por cantidad.
+
+El proyecto tiene dos (y solo dos) clases con método `main`:
+
+1. `co.edu.poli.ventas.GenerateInfoFiles`: genera los archivos de entrada.
+2. `co.edu.poli.ventas.main`: lee los archivos de entrada y genera los reportes.
+
+Ninguno de los dos programas solicita información al usuario. Ambos muestran
+un mensaje de finalización exitosa o un mensaje de error.
 
 ## Estructura del proyecto
 
@@ -17,19 +25,26 @@ pseudoaleatorios que servirán como entrada para el programa principal
 ProyectoVentasPOLI/
 ├── .project
 ├── .classpath
+├── README.md
+├── conslusion.txt
 ├── src/
 │   └── co/edu/poli/ventas/
-│       ├── GenerateInfoFiles.java      (clase con el método main de esta entrega)
+│       ├── GenerateInfoFiles.java      (primera clase con main: genera los archivos)
+│       ├── main.java                   (segunda clase con main: genera los reportes)
 │       ├── generador/
 │       │   └── GeneradorArchivos.java  (métodos de generación de archivos de prueba)
+│       ├── procesador/
+│       │   └── ProcesadorVentas.java   (lectura, validación, acumulación y reportes)
 │       └── modelo/
 │           ├── Producto.java
 │           └── Vendedor.java
-└── data/                                (se genera automáticamente al ejecutar el programa)
+└── data/
     ├── productos.txt
     ├── vendedores.txt
-    └── ventas/
-        └── ventas_<nombre>_<documento>.txt
+    ├── ventas/
+    │   └── ventas_<nombre>_<documento>.txt
+    ├── reporte_vendedores.csv
+    └── reporte_productos.csv
 ```
 
 ## Cómo importar el proyecto en Eclipse
@@ -41,31 +56,35 @@ ProyectoVentasPOLI/
 
 ## Cómo ejecutar
 
-Ejecutar la clase `co.edu.poli.ventas.GenerateInfoFiles` (clic derecho →
-`Run As > Java Application`). El programa no solicita ningún dato por
-consola; al finalizar imprime un mensaje de éxito o de error.
+1. Ejecutar `co.edu.poli.ventas.GenerateInfoFiles` (clic derecho →
+   `Run As > Java Application`). Genera en `data/`:
+   - `productos.txt`: 15 productos (`ID;Nombre;Precio`).
+   - `vendedores.txt`: 8 vendedores (`TipoDocumento;NúmeroDocumento;Nombres;Apellidos`).
+   - `ventas/`: un archivo por vendedor, con `TipoDocumento;NúmeroDocumento`
+     en la primera línea y una venta por línea (`IDProducto;Cantidad;`),
+     entre 5 y 15 ventas por vendedor.
+2. Ejecutar `co.edu.poli.ventas.main`. Genera en `data/`:
+   - `reporte_vendedores.csv`: `NombreCompleto;DineroRecaudado`, de mayor a menor.
+   - `reporte_productos.csv`: `NombreProducto;Precio`, ordenado por cantidad
+     vendida de mayor a menor.
 
-Al ejecutarse, se generan dentro de la carpeta `data`:
+El repositorio ya incluye un juego de datos de ejemplo en `data/`, por lo que
+`main` puede ejecutarse directamente.
 
-- `productos.txt`: 15 productos pseudoaleatorios (`ID;Nombre;Precio`).
-- `vendedores.txt`: 8 vendedores pseudoaleatorios
-  (`TipoDocumento;NúmeroDocumento;Nombres;Apellidos`).
-- `data/ventas/`: un archivo de ventas por cada vendedor generado, con el
-  tipo y número de documento en la primera línea y una línea por cada
-  venta (`IDProducto;Cantidad;`), referenciando siempre productos que sí
-  existen en `productos.txt`.
-
-Las cantidades a generar (número de productos, de vendedores y el rango de
-ventas por vendedor) están definidas como constantes al inicio de
-`GenerateInfoFiles`, por si se requiere ajustarlas para otras pruebas.
-
-## Métodos de generación implementados (`GeneradorArchivos`)
+## Métodos de generación (`GeneradorArchivos`)
 
 - `createProductsFile(int productsCount)`
 - `createSalesManInfoFile(int salesmanCount)`
 - `createSalesMenFile(int randomSalesCount, String name, long id)`
 
-> Nota: como `createSalesMenFile` no recibe el tipo de documento como
-> argumento (solo nombre e id), se asigna por defecto el tipo `"CC"` para
-> el archivo de ventas individual. Este supuesto puede ajustarse fácilmente
-> si el docente indica un criterio distinto.
+Como `createSalesMenFile` no recibe el tipo de documento, el archivo de ventas
+usa `CC` por defecto. Por eso la clase `main` identifica a cada vendedor por
+su número de documento.
+
+## Elementos extra implementados
+
+- **Más de un archivo por vendedor:** las ventas de todos los archivos de un
+  mismo vendedor se suman en un solo total.
+- **Detección de datos erróneos:** se descartan y se informan en consola las
+  líneas con formato inválido, productos inexistentes, cantidades o precios
+  negativos y archivos de vendedores no registrados, sin detener el programa.

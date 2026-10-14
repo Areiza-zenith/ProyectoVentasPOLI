@@ -1,0 +1,11 @@
+CONCLUSIONES - PROYECTO VENTAS POLI
+Conceptos Fundamentales de la Programacion - Politecnico Grancolombiano
+
+1. LO APRENDIDO DURANTE EL DESARROLLO DEL PROYECTO
+Aprendimos a leer y escribir archivos planos en Java, a recorrer carpetas para procesar una cantidad desconocida de archivos y a usar estructuras como Map y List para organizar la informacion. Tambien practicamos el ordenamiento con Comparator, el manejo de excepciones con try-catch y la documentacion con Javadoc. Llevar la misma logica a una version web con JavaScript y jQuery nos ayudo a entender que los conceptos de programacion son independientes del lenguaje.
+
+2. POSIBLES APLICACIONES EN LA VIDA PROFESIONAL
+El procesamiento de archivos, la consolidacion de datos y la generacion de reportes son tareas comunes en cualquier empresa, por ejemplo en la integracion de informacion entre sistemas, la automatizacion de reportes de ventas o inventarios y la limpieza de datos antes de analizarlos. Ademas, el trabajo con un repositorio en GitHub, la documentacion del codigo y la division de tareas en equipo son practicas que se usan a diario en el desarrollo de software.
+
+3. DIFICULTADES PRESENTADAS DURANTE EL DESARROLLO DEL PROYECTO
+La principal dificultad fue coordinar el trabajo en equipo y mantener sincronizado el repositorio entre varios integrantes. Tambien fue un reto definir como manejar datos incorrectos sin detener el programa, mantener los mismos formatos de archivo entre la version Java y la version web, y respetar las restricciones del enunciado, como tener solo dos clases con metodo main y no pedir informacion al usuario.
